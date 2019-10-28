@@ -1,0 +1,21 @@
+{
+  "name": "anzilsystems/beba",
+  "description": "Beba API Laravel Wrapper",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Basil Ndonga",
+      "email": "basilndonga@gmail.com"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {},
+  "extra": {
+    "laravel": {
+      "providers": [
+        "AnzilSystems\\Beba\\BebaServiceProvider"
+      ]
+    }
+  }
+}

@@ -1,6 +1,7 @@
 {
   "name": "anzilsystems/beba",
   "description": "Beba API Laravel Wrapper",
+  "version": "1.0.0",
   "type": "library",
   "license": "MIT",
   "authors": [

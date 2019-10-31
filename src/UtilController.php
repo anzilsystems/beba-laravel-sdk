@@ -1,6 +1,6 @@
 <?php
 
-namespace Anzil\Beba;
+namespace AnzilSystems\Beba;
 
 use Illuminate\Http\Request;
 

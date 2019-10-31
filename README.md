@@ -1,17 +1,13 @@
 # beba Shipping API
 
-Laravel Library for implementing **PikieGlobal** Services in Kenya and Ghana
+This is a Laravel library for implementing Pickup and Delivery Services in in Kenya and Ghana on the `beba` API. This is developed on sandbox (testing) mode. To go live contact `Anzil Software Ltd` on <api@anzilsystems.com>.
 
-## About Anzil Software Ltd
-
-[Anzil Software Ltd](https://www.anzilsystems.com) is a Software Company based in Westlands, Nairobi, Kenya that specializes in USSD, SMS, APIs, Web and Mobile applications. Anzil has keen interest in shipping, e-commerce, payments and custom ERP systems. We recognize that developers, ecommerce stores and courier companies need an elaborate API to facilitate pickup and delivery services.
-
-## Introduction
+### Introduction
 
 BebaAPI is a product of [Anzil Software Ltd](https://www.anzilsystems.com) that provides an elaborate API to allow developers, shipping companies, an e-commerce stores integrate pickup and delivery functionality into their applications. [PikieGlobal](https://www.pikieglobal.com) implements bebaAPI to provide a reliable platform for delivering products to customers from virtually any online shop or business through our network of courier companies and riders. Pikie intends to create a network of Partners throughout Africa to expand its reach to millions of
 customers intending to transport cargo within a country (inland).
 
-## Configuration
+### Configuration
 
 At your project root, create a .env file and in it set the client key, client secret and endpoint url
 
@@ -20,7 +16,7 @@ At your project root, create a .env file and in it set the client key, client se
 `BEBA_ENDPOINT_URL =[endpoint url]`<br>
 `BEBA_ENV=[live or sandbox]`<br>
 
-## Installation
+### Installation
 
 1. In order to install beba Library, just run `composer require anzilsystems/beba`:
 
@@ -36,7 +32,7 @@ At your project root, create a .env file and in it set the client key, client se
      'Beba' =>  AnzilSystems\Beba\BebaFacade::class,
 ```
 
-## Usage
+### Usage
 
 ```php
 <?php
@@ -157,35 +153,36 @@ class TestController extends Controller
 
 ```
 
-## Support
+### Support
+
+Need support using this package:-
 
 - [API QUERY <api-feedback@pikieglobal.com>][link-author]
 - [Official Skype ID](basilndonga)
 
-## Security
+If you wish to be added as a contributor to this project let us know.
+
+### License
+
+This Package is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+
+Happy coding!!!!!!!
+
+### Security
 
 If you discover any security related issues, please email _api-feedback@pikieglobal.com_ instead of using the issue tracker.
-
-## License
-
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
 
 [ico-version]: https://img.shields.io/packagist/v/samerior/mobile-money.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
 [ico-travis]: https://img.shields.io/travis/samerior/mobile-money/master.svg?style=flat-square
 [ico-style-ci]: https://styleci.io/repos/132899622/shield?branch=master
-[ico-circle-ci]: https://circleci.com/gh/samerior/mobile-money.png?style=shield
 [ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/samerior/mobile-money.svg?style=flat-square
 [ico-code-quality]: https://img.shields.io/scrutinizer/g/samerior/mobile-money.svg?style=flat-square
 [ico-downloads]: https://img.shields.io/packagist/dt/samerior/mobile-money.svg?style=flat-square
-[link-packagist]: https://packagist.org/packages/samerior/mobile-money
-[link-travis]: https://travis-ci.org/samerior/mobile-money
-[link-circle-ci]: https://circleci.com/gh/samerior/mobile-money
-[link-scrutinizer]: https://scrutinizer-ci.com/g/samerior/mobile-money/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/samerior/mobile-money
-[link-downloads]: https://packagist.org/packages/samerior/mobile-money
+[link-packagist]: https://packagist.org/packages/anzilsystems
+[link-downloads]: https://packagist.org/packages/anzilsystems/beba
 [link-style-ci]: https://styleci.io/repos/132899622
-[link-author]: https://github.com/samerior
+[link-author]: https://github.com/anzilsystems
 [link-contributors]: ../../contributors
 
 ```

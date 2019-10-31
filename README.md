@@ -20,17 +20,18 @@ At your project root, create a .env file and in it set the client key, client se
 
 1. In order to install beba Library, just run `composer require anzilsystems/beba`:
 
-2. Open your `config/app.php` and add the following to the `providers` array:
+2. Open your `config/app.php` and add the following to the to the `providers` and `aliases` array. When using Laravel 5.5+, the package will automatically register. For laravel 5.4 and below, include the service provider and its alias within your `config/app.php`:
 
-```php
-      AnzilSystems\Beba\BebaServiceProvider::class,
-```
 
-3. In the same `config/app.php` and add the following to the `aliases` array:
+    ```php
+    'providers' => [
+        AnzilSystems\Beba\BebaServiceProvider::class,
+    ],
 
-```php
-     'Beba' =>  AnzilSystems\Beba\BebaFacade::class,
-```
+    'aliases' => [
+        'Beba' =>  AnzilSystems\Beba\BebaFacade::class,
+    ],
+    ```
 
 ### Usage
 

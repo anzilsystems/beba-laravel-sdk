@@ -1,6 +1,6 @@
 # beba Shipping API
 
-This is a Laravel library for implementing Pickup and Delivery Services in in Kenya and Ghana on the `beba` API. This is developed on sandbox (testing) mode. To go live contact `Anzil Software Ltd` on <api@anzilsystems.com>.
+This is a Laravel library for implementing Pickup and Delivery Services in in Kenya and Ghana on the `beba` API. The package uses REST API that is documented on this [link](https://www.pikieglobal.com/docs). This is developed on sandbox (testing) mode. To go live contact `Anzil Software Ltd` on <api-feedback@pikieglobal.com>.
 
 ### Introduction
 
@@ -153,13 +153,16 @@ class TestController extends Controller
     }
 
 ```
+## Reference
+
+   [REST API Reference] (https://www.pikieglobal.com/docs)
 
 ### Support
 
 Need support using this package:-
 
-- [API QUERY <api-feedback@pikieglobal.com>][link-author]
-- [Official Skype ID](basilndonga)
+- _api-feedback@pikieglobal.com_
+
 
 If you wish to be added as a contributor to this project let us know.
 

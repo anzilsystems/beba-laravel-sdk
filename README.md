@@ -182,6 +182,7 @@ Need support using this package:-
 ## Contributors
 
 - [Basil Ndonga](https://www.linkedin.com/in/basil-ndonga-1a76ba124/)
+- Dennis Mayeku
 
 ### License
 

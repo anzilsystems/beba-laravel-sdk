@@ -18,7 +18,7 @@ At your project root, create a .env file and in it set the client key, client se
 
 ### Installation
 
-1. In order to install beba Library, just run `composer require anzilsystems/beba`:
+1. In order to install beba Library, just run `composer require anzilsystems/beba-laravel-sdk`:
 
 2. Open your `config/app.php` and add the following to the to the `providers` and `aliases` array. When using Laravel 5.5+, the package will automatically register. For laravel 5.4 and below, include the service provider and its alias within your `config/app.php`:
 
@@ -46,7 +46,15 @@ use Beba;
 class TestController extends Controller
 {
     public function getCouriers(){
-        print_r(Beba::getCouriers('254','1'));
+        print_r(Beba::getCouriers('KEN','1')); // country_code, service_category
+    }
+
+    public function getSpecificCourier(){
+        print_r(Beba::getSpecificCourier('1')); // courier_id
+    }
+
+     public function getSpecificDriver(){
+        print_r(Beba::getSpecificDriver('1')); // driver_id
     }
 
     public function getRates(){
@@ -58,15 +66,15 @@ class TestController extends Controller
         print_r(Beba::getCountries());
     }
 
-    public function getServiceCategories(){
+    public function getServices(){
 
-        print_r(Beba::getServiceCategories());
+        print_r(Beba::getServices());
 
     }
 
     public function getPaymentOptions(){
         //parameter country code
-        print_r(Beba::getPaymentOptions('233'));
+        print_r(Beba::getPaymentOptions('KEN')); //country code
 
     }
 
@@ -77,16 +85,23 @@ class TestController extends Controller
     }
 
     public function getNearbyDrivers(){
-        //parameter radius,current latitude, current longitude
+        //parameters radius (km),current latitude, current longitude
         print_r(Beba::getNearbyDrivers('5','-1.2173611','36.9000374'));
 
     }
 
-    public function updateOrderStatus(){
-        //parameter unique id UUID Version 4
-        print_r(Beba::updateOrderStatus('45684e0b-8c73-41be-a118-fc7ab1c17694'));
+    public function getNearbyCouriers(){
+        //parameters radius (km),current latitude, current longitude
+        print_r(Beba::getNearbyCouriers('5','-1.2173611','36.9000374'));
 
     }
+
+     public function updateDriverPayment(){
+        //parameters unique_id , driver_id
+        print_r(Beba::updateDriverPayment('45684e0b-8c73-41be-a118-fc7ab1c17694','6'));
+
+    }
+
 
     public function cancelShipment(){
         //parameter unique id UUID Version 4
@@ -95,60 +110,61 @@ class TestController extends Controller
     }
 
     public function createShipment(){
-        //parameter unique id UUID Version 4
+  
+      # Parameters 
+      $item_detail = [
+        [
+            'item_name' => 'Fish fried',
+            'item_quantity'  => 2,
+            'unit_cost'    => '200',
+            'unit_weight'    => '', //optional
+            'unit_volume'    => '',  //optional
 
-        $item_detail = [
-            [
-                'item_name' => 'Fish fried',
-                'qty_no'  => 2,
-                'rate'    => 'KES 200'
-            ],
-            [
-                'item_name' => 'Beef Stew',
-                'qty_no'  => 2,
-                'rate'    => 'KES 300'
-            ]
 
-        ];
+        ],
+        [
+            'item_name' => 'Beef Stew',
+            'item_quantity'  => 2,
+            'unit_cost'    => '200',
+            'unit_weight'    => '', //optional
+            'unit_volume'    => '',  //optional
+        ]
 
-        $shipment_data = [
-            'order_id' => '5',
-            'unique_id' => '45684e0b-8c73-41be-a118-fc7ab1c17694',
-            'trans_id' => '5',
-            'service_id' => '1',
-            'customer_id' => '4',
-            'customer_name' => 'Jane Doe',
-            'customer_phone' => '254721123456',
-            'customer_email' => 'janedoe@gmail.com',
-            'pickup_address' => 'Safari Park Fly Over, Thika Road, Nairobi, Kenya',
-            'pickup_country' => 'KENYA',
-            'pickup_latitude' => '-1.2256562',
-            'pickup_longitude' => '36.88495850000004',
-            'customer_city' => 'Nairobi, Kenya',
-            'business_id' => '1',
-            'business_name' => 'ABC Hotel',
-            'business_phone' => '254721174236',
-            'business_email' => 'johndoe@gmail.com	',
-            'delivery_address' => 'Naivas, Outer Ring Road, Nairobi, Kenya',
-            'delivery_country' => 'KENYA',
-            'delivery_latitude' => '-1.2476927',
-            'delivery_longitude' => '36.872455',
-            'business_city' => 'Nairobi , Kenya',
-            'courier_id' => '12',
-            'courier_type' => 'corporate',
-            'customer_detail' => '', //optional
-            'item_detail' => $item_detail,
-            'business_detail' => '', //optional
-            'business_hours' => '8.00 PM- 5 PM',
-            'distance'       => '7.1',
-            'order_value'  => '700',
-            'shipping_rate'  => '355',
-            'paybill_number' => '35323',
-            'tax_pin' => '123455',
-            'payment_type' => 'bank'
-        ];
+    ];
+    
+    $shipment_data = [
 
-        print_r(Beba::createShipment($shipment_data));
+        'unique_id' => '45684e0b-8c73-41be-a118-fc7ab1c17694', //UUID Version 4
+        'service_id' => '1',
+        'customer_name' => 'Jane Doe',
+        'customer_phone' => '254721123456',
+        'customer_email' => 'janedoe@gmail.com',
+        'pickup_address' => 'Safari Park Fly Over, Thika Road, Nairobi, Kenya',
+        'pickup_country' => 'KENYA',
+        'pickup_latitude' => '-1.2256562',
+        'pickup_longitude' => '36.88495850000004',
+        'customer_city' => 'Nairobi, Kenya',
+        'business_name' => 'ABC Hotel',
+        'business_phone' => '254721174236',
+        'business_email' => 'johndoe@gmail.com	',
+        'delivery_address' => 'Naivas, Outer Ring Road, Nairobi, Kenya',
+        'delivery_country' => 'KENYA',
+        'delivery_latitude' => '-1.2476927',
+        'delivery_longitude' => '36.872455',
+        'business_city' => 'Nairobi , Kenya',
+        'courier_id' => '12',
+        'driver_id' => '',
+        'courier_type' => '1',
+        'item_detail' => $item_detail,
+        'business_hours' => '8.00 PM- 5 PM',
+        'order_value'  => '700',
+        'shipping_rate'  => '355',
+        'shipping_mode'  => '1', //send to one 
+        'currency_code'  => 'KES'
+            
+    ];
+
+    print_r(Beba::createShipment($shipment_data));
 
     }
 
@@ -157,14 +173,15 @@ class TestController extends Controller
 
    [REST API Reference] (https://www.pikieglobal.com/docs)
 
-### Support
+## Support
 
 Need support using this package:-
 
-- _api-feedback@pikieglobal.com_
+- _api-feedback@pikieglobal.com_ 
 
+## Contributors
 
-If you wish to be added as a contributor to this project let us know.
+- [Basil Ndonga](https://www.linkedin.com/in/basil-ndonga-1a76ba124/)
 
 ### License
 
@@ -175,20 +192,5 @@ Happy coding!!!!!!!
 ### Security
 
 If you discover any security related issues, please email _api-feedback@pikieglobal.com_ instead of using the issue tracker.
-
-[ico-version]: https://img.shields.io/packagist/v/samerior/mobile-money.svg?style=flat-square
-[ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/samerior/mobile-money/master.svg?style=flat-square
-[ico-style-ci]: https://styleci.io/repos/132899622/shield?branch=master
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/samerior/mobile-money.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/samerior/mobile-money.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/samerior/mobile-money.svg?style=flat-square
-[link-packagist]: https://packagist.org/packages/anzilsystems
-[link-downloads]: https://packagist.org/packages/anzilsystems/beba
-[link-style-ci]: https://styleci.io/repos/132899622
-[link-author]: https://github.com/anzilsystems
-[link-contributors]: ../../contributors
-
-```
 
 ```

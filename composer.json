@@ -1,5 +1,5 @@
 {
-  "name": "anzilsystems/beba",
+  "name": "anzilsystems/beba-laravel-sdk",
   "description": "Beba API Laravel Wrapper",
   "version": "1.0.0",
   "type": "library",

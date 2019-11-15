@@ -57,13 +57,50 @@ function get_accesstoken(){
     // close curl resource to free up system resources 
     curl_close($curl);
 }
+
+
+// get specific courier
+function getSpecificCourier($courier_id){
+
+    $access_token = $this->get_accesstoken();
+    $endpoint_url = env('BEBA_ENDPOINT_URL').'/api/v1/couriers/'.$courier_id;
+  
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_URL, $endpoint_url);
+    curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "GET");
+    curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json','Authorization: Bearer '.$access_token));
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+    $curl_response = curl_exec($curl);
+    echo $curl_response;
+    // close curl resource to free up system resources 
+    curl_close($curl);
+}
+
+function getSpecificDriver($driver_id){
+
+    $access_token = $this->get_accesstoken();
+    $endpoint_url = env('BEBA_ENDPOINT_URL').'/api/v1/drivers/'.$driver_id;
+  
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_URL, $endpoint_url);
+    curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "GET");
+    curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json','Authorization: Bearer '.$access_token));
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+    $curl_response = curl_exec($curl);
+    echo $curl_response;
+    // close curl resource to free up system resources 
+    curl_close($curl);
+}
+  
   
 
  // get couriers
  function getRates($pickup_latitude,$pickup_longitude,$delivery_latitude, $delivery_longitude){
 
     $access_token = $this->get_accesstoken();
-    $endpoint_url = env('BEBA_ENDPOINT_URL').'/api/v1/get_rates';
+    $endpoint_url = env('BEBA_ENDPOINT_URL').'/api/v1/rates';
   
     # Parameters 
     $curl_post_data = array(
@@ -94,7 +131,7 @@ function get_accesstoken(){
 function getCountries(){
 
     $access_token = $this->get_accesstoken();
-    $endpoint_url = env('BEBA_ENDPOINT_URL').'/api/v1/get_countries';
+    $endpoint_url = env('BEBA_ENDPOINT_URL').'/api/v1/countries';
 
     $curl = curl_init();
     curl_setopt($curl, CURLOPT_URL, $endpoint_url);
@@ -110,10 +147,10 @@ function getCountries(){
 
 
 // get service categories
-function getServiceCategories(){
+function getServices(){
 
     $access_token = $this->get_accesstoken();
-    $endpoint_url = env('BEBA_ENDPOINT_URL').'/api/v1/get_services';
+    $endpoint_url = env('BEBA_ENDPOINT_URL').'/api/v1/services';
 
     $curl = curl_init();
     curl_setopt($curl, CURLOPT_URL, $endpoint_url);
@@ -131,7 +168,7 @@ function getServiceCategories(){
 function getPaymentOptions($country_code){
 
     $access_token = $this->get_accesstoken();
-    $endpoint_url = env('BEBA_ENDPOINT_URL').'/api/v1/get_payment_options';
+    $endpoint_url = env('BEBA_ENDPOINT_URL').'/api/v1/payment-options';
   
     # Parameters 
     $data = array("country_code" => $country_code);
@@ -155,19 +192,11 @@ function getPaymentOptions($country_code){
 function getOrderStatus($unique_id){
 
     $access_token = $this->get_accesstoken();
-    $endpoint_url = env('BEBA_ENDPOINT_URL').'/api/v1/get_order_status';
+    $endpoint_url = env('BEBA_ENDPOINT_URL').'/api/v1/orders-status/'.$unique_id;
   
-    # Parameters 
-    $data = array( 
-          "unique_id"    => $unique_id, 
-        );
-
-    $data_string = json_encode($data);
-
     $curl = curl_init();
     curl_setopt($curl, CURLOPT_URL, $endpoint_url);
-    curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
-    curl_setopt($curl, CURLOPT_POSTFIELDS, $data_string);
+    curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "GET");
     curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json','Authorization: Bearer '.$access_token));
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
     
@@ -182,7 +211,7 @@ function getOrderStatus($unique_id){
 function getNearbyDrivers($radius,$current_latitude,$current_longitude){
 
     $access_token = $this->get_accesstoken();
-    $endpoint_url = env('BEBA_ENDPOINT_URL').'/api/v1/get_nearby_drivers';
+    $endpoint_url = env('BEBA_ENDPOINT_URL').'/api/v1/nearby-drivers';
   
     # Parameters 
     $data = array( 
@@ -206,16 +235,45 @@ function getNearbyDrivers($radius,$current_latitude,$current_longitude){
     curl_close($curl);
 
 }
-// get order status
-function updateOrderStatus($unique_id){
 
-    $access_token = $this->get_accesstoken();
-    $endpoint_url = env('BEBA_ENDPOINT_URL').'/api/v1/order_status/'.$unique_id;
+// get nearby drivers
+function getNeabyCouriers($radius,$current_latitude,$current_longitude){
+
+    $access_token = get_accesstoken();
+    $endpoint_url = env('BEBA_ENDPOINT_URL').'/api/v1/nearby-couriers';
   
     # Parameters 
     $data = array( 
-          "order_status"    => "cancel", 
+          "radius"    => $radius, 
+          'current_latitude' => $current_latitude,
+          'current_longitude' => $current_longitude,
         );
+
+    $data_string = json_encode($data);
+
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_URL, $endpoint_url);
+    curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
+    curl_setopt($curl, CURLOPT_POSTFIELDS, $data_string);
+    curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json','Authorization: Bearer '.$access_token));
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    
+    $curl_response = curl_exec($curl);
+    echo $curl_response;
+    // close curl resource to free up system resources 
+    curl_close($curl);
+
+}
+
+
+// update driver payment
+function updateDriverPayment($unique_id ,$driver_id){
+
+    $access_token = $this->get_accesstoken();
+    $endpoint_url = env('BEBA_ENDPOINT_URL').'/api/v1/driver-payment/update/'.$unique_id.'/'.$driver_id;
+  
+    # Parameters 
+    $data = array("payment_status" => "1");
 
     $data_string = json_encode($data);
 
@@ -233,25 +291,7 @@ function updateOrderStatus($unique_id){
     
 }
 
-//cancel shpment
-function cancelShipment($unique_id){
 
-    $access_token = $this->get_accesstoken();
-    $endpoint_url = env('BEBA_ENDPOINT_URL').'/api/v1/cancel_shipment/'.$unique_id;
-  
-    $curl = curl_init();
-    curl_setopt($curl, CURLOPT_URL, $endpoint_url);
-    curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "DELETE");
-    curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json','Authorization: Bearer '.$access_token));
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-    
-    $curl_response = curl_exec($curl);
-    echo $curl_response;
-    // close curl resource to free up system resources 
-    curl_close($curl);
-    
-    
-}
 function createShipment($courier_data)
 {    
 
@@ -261,11 +301,8 @@ function createShipment($courier_data)
     # Parameters 
     $shipment_data = array(
 
-        'order_id' => $courier_data['order_id'],
         'unique_id' => $courier_data['unique_id'],
-        'trans_id' => $courier_data['trans_id'],
         'service_id' => $courier_data['service_id'],
-        'customer_id' => $courier_data['customer_id'],
         'customer_name' => $courier_data['customer_name'],
         'customer_phone' => $courier_data['customer_phone'],
         'customer_email' => $courier_data['customer_email'],
@@ -274,7 +311,6 @@ function createShipment($courier_data)
         'delivery_country' => $courier_data['delivery_country'],
         'delivery_latitude' => $courier_data['delivery_latitude'],
         'delivery_longitude' => $courier_data['delivery_longitude'],
-        'business_id' => $courier_data['business_id'],
         'business_name' => $courier_data['business_name'],
         'business_phone' => $courier_data['business_phone'],
         'business_email' => $courier_data['business_email'],
@@ -284,14 +320,13 @@ function createShipment($courier_data)
         'pickup_latitude' => $courier_data['pickup_latitude'],
         'pickup_longitude' => $courier_data['pickup_longitude'],
         'courier_id' => $courier_data['courier_id'],
+        'driver_id' => $courier_data['driver_id'],
         'courier_type' => $courier_data['courier_type'],
-        'customer_detail' => $courier_data['customer_detail'],
         'item_detail' => serialize($courier_data['item_detail']),
-        'business_detail' => $courier_data['business_detail'],
-        'business_hours' => $courier_data['business_hours'],
-        'distance'       => $courier_data['distance'],
         'order_value'  => $courier_data['order_value'],
         'shipping_rate'  => $courier_data['shipping_rate'],
+        'shipping_mode'  => $courier_data['shipping_mode'],
+        'currency_code'  => $courier_data['currency_code'],
     );
    
 
@@ -307,7 +342,27 @@ function createShipment($courier_data)
     $curl_response = curl_exec($curl);
     echo $curl_response;
     // close curl resource to free up system resources 
+    curl_close($curl);  
+  }
+
+
+//cancel shipment
+function cancelShipment($unique_id){
+
+    $access_token = $this->get_accesstoken();
+    $endpoint_url = env('BEBA_ENDPOINT_URL').'/api/v1/shipments/'.$unique_id;
+  
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_URL, $endpoint_url);
+    curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "DELETE");
+    curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json','Authorization: Bearer '.$access_token));
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    
+    $curl_response = curl_exec($curl);
+    echo $curl_response;
+    // close curl resource to free up system resources 
     curl_close($curl);
-   
+    
+    
 }
 }

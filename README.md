@@ -1,10 +1,10 @@
 # beba Shipping API
 
-This is a Laravel library for implementing Pickup and Delivery Services in in Kenya and Ghana on the `beba` API. The package uses REST API that is documented on this [link](https://www.pikieglobal.com/docs). This is developed on sandbox (testing) mode. To go live contact `Anzil Software Ltd` on <api-feedback@pikieglobal.com>.
+This is a Laravel library for implementing Pickup and Delivery Services in Kenya and Ghana on the `beba` API. The package uses REST API that is documented on this [link](https://www.pikieglobal.com/docs). This is developed on sandbox (testing) mode. To go live contact `Anzil Software Ltd` on <api-feedback@pikieglobal.com>.
 
 ### Introduction
 
-BebaAPI is a product of [Anzil Software Ltd](https://www.anzilsystems.com) that provides an elaborate API to allow developers, shipping companies, an e-commerce stores integrate pickup and delivery functionality into their applications. [PikieGlobal](https://www.pikieglobal.com) implements bebaAPI to provide a reliable platform for delivering products to customers from virtually any online shop or business through our network of courier companies and riders. Pikie intends to create a network of Partners throughout Africa to expand its reach to millions of
+BebaAPI is a product of [Anzil Software Ltd](https://www.anzilsystems.com) that provides an elaborate API to allow developers, shipping companies, and e-commerce stores integrate pickup and delivery functionality into their applications. [PikieGlobal](https://www.pikieglobal.com) implements bebaAPI to provide a reliable platform for delivering products to customers from virtually any online shop or business through our network of courier companies and riders. Pikie intends to create a network of Partners throughout Africa to expand its reach to millions of
 customers intending to transport cargo within a country (inland).
 
 ### Configuration
@@ -20,7 +20,7 @@ At your project root, create a .env file and in it set the client key, client se
 
 1. In order to install beba Library, just run `composer require anzilsystems/beba-laravel-sdk`:
 
-2. Open your `config/app.php` and add the following to the to the `providers` and `aliases` array. When using Laravel 5.5+, the package will automatically register. For laravel 5.4 and below, include the service provider and its alias within your `config/app.php`:
+2. Open your `config/app.php` and add the following to the to the `providers` and `aliases` array. When using Laravel 5.5+, the package will automatically register. For Laravel 5.4 and below, include the service provider and its alias within your `config/app.php`:
 
 
     ```php

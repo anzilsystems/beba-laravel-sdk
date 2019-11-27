@@ -158,7 +158,6 @@ class TestController extends Controller
         'item_detail' => $item_detail,
         'business_hours' => '8.00 PM- 5 PM',
         'order_value'  => '700',
-        'shipping_rate'  => '355',
         'shipping_mode'  => '1', //send to one 
         'currency_code'  => 'KES'
             

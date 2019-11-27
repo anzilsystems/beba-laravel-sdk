@@ -324,7 +324,6 @@ function createShipment($courier_data)
         'courier_type' => $courier_data['courier_type'],
         'item_detail' => serialize($courier_data['item_detail']),
         'order_value'  => $courier_data['order_value'],
-        'shipping_rate'  => $courier_data['shipping_rate'],
         'shipping_mode'  => $courier_data['shipping_mode'],
         'currency_code'  => $courier_data['currency_code'],
     );

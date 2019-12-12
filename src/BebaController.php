@@ -322,7 +322,7 @@ function createShipment($courier_data)
         'courier_id' => $courier_data['courier_id'],
         'driver_id' => $courier_data['driver_id'],
         'courier_type' => $courier_data['courier_type'],
-        'item_detail' => serialize($courier_data['item_detail']),
+        'item_detail' => $courier_data['item_detail'],
         'order_value'  => $courier_data['order_value'],
         'shipping_mode'  => $courier_data['shipping_mode'],
         'currency_code'  => $courier_data['currency_code'],

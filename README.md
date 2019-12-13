@@ -84,6 +84,12 @@ class TestController extends Controller
 
     }
 
+    public function getOrderDetail(){
+        //parameter unique id UUID Version 4
+        print_r(Beba::getOrderDetail('45684e0b-8c73-41be-a118-fc7ab1c17694'));
+
+    }
+
     public function getNearbyDrivers(){
         //parameters radius (km),current latitude, current longitude
         print_r(Beba::getNearbyDrivers('5','-1.2173611','36.9000374'));
@@ -95,13 +101,6 @@ class TestController extends Controller
         print_r(Beba::getNearbyCouriers('5','-1.2173611','36.9000374'));
 
     }
-
-     public function updateDriverPayment(){
-        //parameters unique_id , driver_id
-        print_r(Beba::updateDriverPayment('45684e0b-8c73-41be-a118-fc7ab1c17694','6'));
-
-    }
-
 
     public function cancelShipment(){
         //parameter unique id UUID Version 4

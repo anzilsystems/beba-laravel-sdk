@@ -192,7 +192,26 @@ function getPaymentOptions($country_code){
 function getOrderStatus($unique_id){
 
     $access_token = $this->get_accesstoken();
-    $endpoint_url = env('BEBA_ENDPOINT_URL').'/api/v1/orders-status/'.$unique_id;
+    $endpoint_url = env('BEBA_ENDPOINT_URL').'/api/v1/order-status/'.$unique_id;
+  
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_URL, $endpoint_url);
+    curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "GET");
+    curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json','Authorization: Bearer '.$access_token));
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    
+    $curl_response = curl_exec($curl);
+    echo $curl_response;
+    // close curl resource to free up system resources 
+    curl_close($curl);
+
+}
+
+// get order status
+function getOrderDetail($unique_id){
+
+    $access_token = $this->get_accesstoken();
+    $endpoint_url = env('BEBA_ENDPOINT_URL').'/api/v1/order-detail/'.$unique_id;
   
     $curl = curl_init();
     curl_setopt($curl, CURLOPT_URL, $endpoint_url);
@@ -264,33 +283,6 @@ function getNeabyCouriers($radius,$current_latitude,$current_longitude){
     curl_close($curl);
 
 }
-
-
-// update driver payment
-function updateDriverPayment($unique_id ,$driver_id){
-
-    $access_token = $this->get_accesstoken();
-    $endpoint_url = env('BEBA_ENDPOINT_URL').'/api/v1/driver-payment/update/'.$unique_id.'/'.$driver_id;
-  
-    # Parameters 
-    $data = array("payment_status" => "1");
-
-    $data_string = json_encode($data);
-
-    $curl = curl_init();
-    curl_setopt($curl, CURLOPT_URL, $endpoint_url);
-    curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PUT");
-    curl_setopt($curl, CURLOPT_POSTFIELDS, $data_string);
-    curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json','Authorization: Bearer '.$access_token));
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-    
-    $curl_response = curl_exec($curl);
-    echo $curl_response;
-    // close curl resource to free up system resources 
-    curl_close($curl);
-    
-}
-
 
 function createShipment($courier_data)
 {    
